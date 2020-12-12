@@ -27,17 +27,19 @@
         <!--for loop starts here-->
         {% for r in result %}
 
-        <div class="flex-box" style="color:rgb(0, 0, 0);background-color:#ffa31a">
+        <div  style="color:rgb(0, 0, 0);background-color:#ffa31a">
           <h1>{{ r.author}}</h1>
-          <div class="email_id" style="color: navy;">
+        </div>
+
+         <div class="email_id" style="color: navy;background-color:#ffa31a">
             <h6>{{r.email_id}}</h6>
           </div>
-        </div>
 
         <div style="color:black;font-size:28px;background-color:#99ffff">
           <p>{{ r.quote}}</p>
         </div>
         {% endfor%}
+      </div>
 
         <!--for loop ends here-->
 
@@ -45,12 +47,6 @@
 
 
     </div>
-
-    <!--
-    <div>
-      <a href="http://www.facebook.com/sharer.php?u=https://wallpaperaccess.com/writing#1196472"></a>
-    </div>
-    -->
 
 
   </body>
