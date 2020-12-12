@@ -1,6 +1,9 @@
 from flask import Flask ,render_template,request,redirect,url_for
 from flask_sqlalchemy import SQLAlchemy
 
+from flask_script import Manager
+from flask_migrate import Migrate,MigrateCommand
+
 app = Flask(__name__)
 
 #app.config['SQLALCHEMY_DATABASE_URI'] ='postgresql+psycopg2://postgres:nainesh20@localhost/quotes'
@@ -9,10 +12,17 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS']= False
 
 db = SQLAlchemy(app)
 
+migrate = Migrate()
+migrate.init_app(app, db)
+manager = Manager(app)
+
+manager.add_command('db', MigrateCommand)
+
 class Favquotes(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     author = db.Column(db.String(30))
     quote = db.Column(db.String(2000))
+    email_id = db.Column(db.String(30))
 
 
 @app.route('/')
@@ -28,7 +38,11 @@ def quotes():
 def process():
     author = request.form['author']
     quote = request.form['quote']
-    quotedata = Favquotes(author=author,quote=quote)
+    email_id = request.form['email_id']
+    quotedata = Favquotes(author=author,quote=quote,email_id=email_id)
     db.session.add(quotedata)
     db.session.commit()
     return redirect(url_for('index'))
+
+if __name__ == "__main__":
+    manager.run()

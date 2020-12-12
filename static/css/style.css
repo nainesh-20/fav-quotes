@@ -1,0 +1,8 @@
+body {
+    background-image: url("/static/1196472.jpg");
+}
+
+.flex-box {
+    display: flex;
+    align-items: right;
+}
